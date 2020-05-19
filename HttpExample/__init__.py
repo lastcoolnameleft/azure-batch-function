@@ -7,7 +7,7 @@ import os
 import sys
 import time
 import azure.functions as func
-import azure.batch.batch_service_client as batch
+import azure.batch._batch_service_client as batch
 import azure.batch.batch_auth as batch_auth
 import uuid
 
