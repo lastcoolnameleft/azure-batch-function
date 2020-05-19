@@ -16,10 +16,15 @@ def add_tasks(batch_service_client, job_id, word):
 
     tasks = list()
 
-    command = "/bin/bash -c \"echo {}\"".format(word)
+    command = "cowsay " + word
     task_id = 'Task-' + str(uuid.uuid4())
+    task_container_settings = batch.models.TaskContainerSettings(
+        image_name='docker/whalesay',
+        container_run_options='--rm --workdir /')
+
     tasks.append(batch.models.TaskAddParameter(
         id=task_id,
+        container_settings=task_container_settings,
         command_line=command))
 
     batch_service_client.task.add_collection(job_id, tasks)
